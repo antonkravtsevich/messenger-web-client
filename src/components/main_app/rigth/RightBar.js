@@ -1,7 +1,7 @@
 import React from 'react';
-import Heading from './Heading'
-import MessageBox from './MessageBox'
-import ReplyBox from './ReplyBox'
+import Heading from './heading/Heading'
+import MessageBox from './message_box/MessageBox'
+import ReplyBox from './reply_box/ReplyBox'
 
 var RightBar = new React.createClass({
   render: function() {

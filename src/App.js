@@ -1,16 +1,10 @@
 import React from 'react';
-import LeftBar from './components/LeftBar'
-import RightBar from './components/RightBar'
+import MainApp from './components/main_app/MainApp'
 
 var App = new React.createClass({
   render: function() {
     return (
-      <div className="conteiner app">
-        <div className="row app-one">
-          <LeftBar />
-          <RightBar />
-        </div>
-      </div>
+      <MainApp />
     );
   }
 });

@@ -1,6 +1,6 @@
 import React from 'react';
-import SearchBox from './SearchBox'
-import ContactsBar from './ContactsBar'
+import SearchBox from './search_box/SearchBox'
+import ContactsBar from './contacts_bar/ContactsBar'
 
 var LeftBar = new React.createClass({
   render: function() {
