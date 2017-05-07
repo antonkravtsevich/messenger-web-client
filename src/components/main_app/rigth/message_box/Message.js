@@ -7,7 +7,7 @@ var Message = new React.createClass({
     }
   },
 
-  render: function() {
+  componentWillMount: function () {
     if (this.props.role === 'sender'){
       this.setState({
         class: "col-sm-12 message-main-sender"
@@ -17,6 +17,9 @@ var Message = new React.createClass({
         class: "col-sm-12 message-main-receiver"
       });
     }
+  },
+
+  render: function() {
     return (
       <div className="row message-body">
         <div className={this.state.class}>

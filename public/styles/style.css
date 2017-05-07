@@ -10,11 +10,6 @@ span {
   box-sizing: border-box;
 }
 
-body {
-  background: #121212;
-  background-size: cover;
-}
-
 .fa-2x {
   font-size: 1.5em;
 }
@@ -30,7 +25,7 @@ body {
 }
 
 .app-one {
-  background-color: #343434;
+  background-color: #f7f7f7;
   height: 100%;
   overflow: hidden;
   margin: 0;
@@ -43,7 +38,6 @@ body {
   margin: 0;
   height: 100%;
 }
-
 .side-one {
   padding: 0;
   margin: 0;
@@ -55,14 +49,28 @@ body {
   top: 0;
 }
 
+.side-two {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 2;
+  position: relative;
+  top: -100%;
+  left: -100%;
+  -webkit-transition: left 0.3s ease;
+  transition: left 0.3s ease;
+
+}
+
+
 .heading {
   padding: 10px 16px 10px 15px;
   margin: 0;
   height: 60px;
   width: 100%;
-  background-color: #212121;
+  background-color: #eee;
   z-index: 1000;
-  border: 1px solid #404040;
 }
 
 .heading-avatar {
@@ -127,15 +135,13 @@ body {
   margin: 0 !important;
   height: 60px;
   width: 100%;
-  color: #BBB
 }
 
 .searchBox-inner {
   height: 100%;
   width: 100%;
   padding: 10px !important;
-  background-color: #212121;
-  border: 1px solid #404040;
+  background-color: #fbfbfb;
 }
 
 
@@ -152,23 +158,23 @@ body {
 .sideBar {
   padding: 0 !important;
   margin: 0 !important;
-  background-color: #343434;
+  background-color: #fff;
   overflow-y: auto;
-  border: 1px solid #404040;
-  height: calc(100%);
+  border: 1px solid #f7f7f7;
+  height: calc(100% - 120px);
 }
 
 .sideBar-body {
   position: relative;
   padding: 10px !important;
-  border-bottom: 1px solid #404040;
+  border-bottom: 1px solid #f7f7f7;
   height: 72px;
   margin: 0 !important;
   cursor: pointer;
 }
 
 .sideBar-body:hover {
-  background-color: #454545;
+  background-color: #f2f2f2;
 }
 
 .sideBar-avatar {
@@ -201,7 +207,7 @@ body {
   text-align: left;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: #EEE;
+  color: #000;
 }
 
 .sideBar-time {
@@ -212,7 +218,7 @@ body {
   text-align: right;
   font-size: 12px;
   padding: 1% !important;
-  color: #BBB;
+  color: rgba(0, 0, 0, .4);
   vertical-align: baseline;
 }
 
@@ -225,7 +231,6 @@ body {
   position: relative;
   left: -100%;
 }
-
 .newMessage-heading {
   padding: 10px 16px 10px 15px !important;
   margin: 0 !important;
@@ -272,7 +277,7 @@ body {
   height: 100%;
   width: 100%;
   padding: 10px !important;
-  background-color: #111111;
+  background-color: #fbfbfb;
 }
 
 .composeBox-inner input:focus {
@@ -307,6 +312,7 @@ body {
   background: url("w.jpg") no-repeat fixed center;
   background-size: cover;
   overflow-y: auto;
+  border: 1px solid #f7f7f7;
   height: calc(100% - 120px);
 }
 .message-previous {
@@ -352,7 +358,6 @@ body {
   font-weight: 200;
   font-size: 14px;
   padding-bottom: 0 !important;
-  color: #909090
 }
 
 .message-time {
@@ -360,7 +365,7 @@ body {
   margin-left: 50px !important;
   font-size: 12px;
   text-align: right;
-  color: #707070;
+  color: #9a9a9a;
 
 }
 
@@ -368,7 +373,7 @@ body {
   width: auto !important;
   padding: 4px 10px 7px !important;
   border-radius: 10px 10px 10px 0;
-  background: #222222;
+  background: #ffffff;
   font-size: 12px;
   text-shadow: 0 1px 1px rgba(0, 0, 0, .2);
   word-wrap: break-word;
@@ -378,7 +383,7 @@ body {
 .sender {
   float: right;
   width: auto !important;
-  background: #111111;
+  background: #dcf8c6;
   border-radius: 10px 10px 0 10px;
   padding: 4px 10px 7px !important;
   font-size: 12px;
@@ -393,10 +398,32 @@ body {
 .reply {
   height: 60px;
   width: 100%;
-  background-color: #404040;
+  background-color: #f5f1ee;
   padding: 10px 5px 10px 5px !important;
   margin: 0 !important;
   z-index: 1000;
+}
+
+.reply-emojis {
+  padding: 5px !important;
+}
+
+.reply-emojis i {
+  text-align: center;
+  padding: 5px 5px 5px 5px !important;
+  color: #93918f;
+  cursor: pointer;
+}
+
+.reply-recording {
+  padding: 5px !important;
+}
+
+.reply-recording i {
+  text-align: center;
+  padding: 5px !important;
+  color: #93918f;
+  cursor: pointer;
 }
 
 .reply-send {
@@ -406,7 +433,7 @@ body {
 .reply-send i {
   text-align: center;
   padding: 5px !important;
-  color: #EEE;
+  color: #93918f;
   cursor: pointer;
 }
 
@@ -425,7 +452,6 @@ body {
   box-shadow: none;
   height: 100%;
   font-size: 16px;
-  background-color: #BBB
 }
 
 .reply-main textarea:focus {
@@ -433,4 +459,210 @@ body {
   border: none;
   text-indent: 5px;
   box-shadow: none;
+}
+
+@media screen and (max-width: 700px) {
+  .app {
+    top: 0;
+    height: 100%;
+  }
+  .heading {
+    height: 70px;
+    background-color: #009688;
+  }
+  .fa-2x {
+    font-size: 2.3em !important;
+  }
+  .heading-avatar {
+    padding: 0 !important;
+  }
+  .heading-avatar-icon img {
+    height: 50px;
+    width: 50px;
+  }
+  .heading-compose {
+    padding: 5px !important;
+  }
+  .heading-compose i {
+    color: #fff;
+    cursor: pointer;
+  }
+  .heading-dot {
+    padding: 5px !important;
+    margin-left: 10px !important;
+  }
+  .heading-dot i {
+    color: #fff;
+    cursor: pointer;
+  }
+  .sideBar {
+    height: calc(100% - 130px);
+  }
+  .sideBar-body {
+    height: 80px;
+  }
+  .sideBar-avatar {
+    text-align: left;
+    padding: 0 8px !important;
+  }
+  .avatar-icon img {
+    height: 55px;
+    width: 55px;
+  }
+  .sideBar-main {
+    padding: 0 !important;
+  }
+  .sideBar-main .row {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .sideBar-name {
+    padding: 10px 5px !important;
+  }
+  .name-meta {
+    font-size: 16px;
+    padding: 5% !important;
+  }
+  .sideBar-time {
+    padding: 10px !important;
+  }
+  .time-meta {
+    text-align: right;
+    font-size: 14px;
+    padding: 4% !important;
+    color: rgba(0, 0, 0, .4);
+    vertical-align: baseline;
+  }
+  /*Conversation*/
+  .conversation {
+    padding: 0 !important;
+    margin: 0 !important;
+    height: 100%;
+    /*width: 100%;*/
+    border-left: 1px solid rgba(0, 0, 0, .08);
+    /*overflow-y: auto;*/
+  }
+  .message {
+    height: calc(100% - 140px);
+  }
+  .reply {
+    height: 70px;
+  }
+  .reply-emojis {
+    padding: 5px 0 !important;
+  }
+  .reply-emojis i {
+    padding: 5px 2px !important;
+    font-size: 1.8em !important;
+  }
+  .reply-main {
+    padding: 2px 8px !important;
+  }
+  .reply-main textarea {
+    padding: 8px !important;
+    font-size: 18px;
+  }
+  .reply-recording {
+    padding: 5px 0 !important;
+  }
+  .reply-recording i {
+    padding: 5px 0 !important;
+    font-size: 1.8em !important;
+  }
+  .reply-send {
+    padding: 5px 0 !important;
+  }
+  .reply-send i {
+    padding: 5px 2px 5px 0 !important;
+    font-size: 1.8em !important;
+  }
+}
+
+
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+.login-page {
+  width: 360px;
+  margin: auto;
+}
+.form {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 360px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+.form input {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+.form button {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #4CAF50;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+.form button:hover,.form button:active,.form button:focus {
+  background: #43A047;
+}
+.form .message {
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;
+}
+.form .message a {
+  color: #4CAF50;
+  text-decoration: none;
+}
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 300px;
+  margin: 0 auto;
+}
+.container:before, .container:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.container .info {
+  margin: 50px auto;
+  text-align: center;
+}
+.container .info h1 {
+  margin: 0 0 15px;
+  padding: 0;
+  font-size: 36px;
+  font-weight: 300;
+  color: #1a1a1a;
+}
+.container .info span {
+  color: #4d4d4d;
+  font-size: 12px;
+}
+.container .info span a {
+  color: #000000;
+  text-decoration: none;
+}
+.container .info span .fa {
+  color: #EF3B3A;
 }
