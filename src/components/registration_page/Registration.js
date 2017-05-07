@@ -15,9 +15,12 @@ var Registration = new React.createClass({
         <div className="login-page">
           <div className="form">
             <form className="register-form">
-              <input type="text" placeholder="name"/>
-              <input type="password" placeholder="password"/>
-              <input type="text" placeholder="email address"/>
+              <input type="text" id="username" placeholder="Login"/>
+              <input type="text" id="email" placeholder="Email address"/>
+              <input type="text" id="first_name" placeholder="First name" />
+              <input type="text" id="last_name" placeholder="Last name" />
+              <input type="password" id="password" placeholder="Password"/>
+              <input type="password" id="conf_password" placeholder="Confirm password" />
               <button onClick={this.redirectToMainApp}>create</button>
               <p className="message">Already registered? <a href="#" onClick={this.redirectToLogin}>Sign In</a></p>
             </form>
