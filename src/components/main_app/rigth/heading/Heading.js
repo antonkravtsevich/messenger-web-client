@@ -7,7 +7,7 @@ var Heading = new React.createClass({
         <div className="col-sm-8 col-xs-7 heading-name">
           <a className="heading-name-meta">{this.props.name}
           </a>
-          <span className="heading-online">{this.props.state}</span>
+          {/*<span className="heading-online">{this.props.state}</span>*/}
         </div>
         <div className="col-sm-1 col-xs-1  heading-dot pull-right">
           <i className="fa fa-ellipsis-v fa-2x  pull-right" aria-hidden="true"></i>

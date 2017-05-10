@@ -3,12 +3,33 @@ import Message from './Message'
 
 var MessageBox = new React.createClass({
   render: function() {
+    let messages = this.props.messages;
+    let user_id = this.props.user_id;
     return (
       <div className="row message" id="conversation">
-        <Message role="receiver" text="Lol kek cheburek" date="Date" />
-        <Message role="sender" text="Yes" date="Date" />
-        <Message role="receiver" text="Wow" date="Date" />
-        <Message role="sender" text="So much good code!" date="Date" />
+        {
+          messages.map(function (message) {
+            if(message.sender_id===user_id) {
+              return (
+                <Message
+                  key={message._id}
+                  role='sender'
+                  text={message.text}
+                  date={message.date}
+                />
+              );
+            } else {
+              return (
+                <Message
+                  key={message._id}
+                  role='receiver'
+                  text={message.text}
+                  date={message.date}
+                />
+              );
+            }
+          })
+        }
       </div>
     );
   }
