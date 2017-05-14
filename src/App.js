@@ -4,9 +4,6 @@ import Login from './components/login_page/Login';
 import Registration from './components/registration_page/Registration'
 import axios from 'axios'
 
-//TODO: timer
-//TODO: registration logic
-
 var App = new React.createClass({
 
   getInitialState: function () {
@@ -16,24 +13,23 @@ var App = new React.createClass({
     }
   },
 
-  redirectToMainApp: function (username, password) {
-    var self = this;
-    axios.post('http://localhost:3001/ask_token', {
-      username: username,
-      password: password
-    }).then(function (response) {
-      console.log(response.data.jwt);
-      self.setState({
-        jwt: response.data.jwt,
-        component: MainApp
-      });
-    }).catch(function (err) {
-      console.error(err)
+  redirectToLogin: function () {
+    this.setState({
+      component: Login
     })
+  },
 
-    /*this.setState({
+  redirectToRegistration: function () {
+    this.setState({
+      component: Registration
+    })
+  },
+
+  redirectToMainApp: function (jwt) {
+    this.setState({
+      jwt: jwt,
       component: MainApp
-    });*/
+    });
   },
 
   setJWT: function (jwt) {

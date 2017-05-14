@@ -15,7 +15,20 @@ redirectToRegistration: function (e) {
 },
 
 redirectToMainApp: function (e) {
-  return this.props.toMainApp(this.state.username, this.state.password);
+    var self = this;
+    axios.post('http://localhost:3001/ask_token', {
+      username: this.state.username,
+      password: this.state.password
+    }).then(function (response) {
+      if(response.data.status!=='error'){
+        var jwt = response.data.jwt;
+        return self.props.toMainApp(jwt);
+      } else {
+        alert(response.data.message);
+      }
+    }).catch(function (err) {
+      console.error(err)
+    });
 },
 
 onChangeLogin: function (e) {
