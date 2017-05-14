@@ -5,7 +5,8 @@ var ContactsBar = new React.createClass({
 
   render: function(){
     let self = this;
-    console.log('ContactsBar: render: '+JSON.stringify(this.props.users_list));
+    //DEBUG
+    //console.log('ContactsBar: render: '+JSON.stringify(this.props.users_list));
     return(
       <div className="row sideBar">
         {

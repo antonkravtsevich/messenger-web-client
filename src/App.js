@@ -4,6 +4,9 @@ import Login from './components/login_page/Login';
 import Registration from './components/registration_page/Registration'
 import axios from 'axios'
 
+//TODO: timer
+//TODO: registration logic
+
 var App = new React.createClass({
 
   getInitialState: function () {
@@ -11,18 +14,6 @@ var App = new React.createClass({
       component: Login,
       jwt: ""
     }
-  },
-
-  redirectToLogin: function () {
-    this.setState({
-      component: Login
-    });
-  },
-
-  redirectToRegistration: function () {
-    this.setState({
-      component: Registration
-    });
   },
 
   redirectToMainApp: function (username, password) {

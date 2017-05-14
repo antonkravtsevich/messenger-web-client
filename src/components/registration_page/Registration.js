@@ -55,7 +55,7 @@ var Registration = new React.createClass({
     return this.props.toLogin();
   },
 
-  redirectToMainApp: function (e) {
+  createUser: function (e) {
     if(this.state.password === this.state.conf_password){
       axios.post('http://localhost:3001/users', {
         username: this.state.username,
@@ -64,18 +64,11 @@ var Registration = new React.createClass({
         last_name: this.state.last_name,
         email: this.state.email
       }).then(function (res) {
-        if(res.data.status === 'ok'){
-          alert('user added');
-        } else {
-          alert('user not added');
-        }
+        alert(res.data.message);
       })
     } else {
       alert('Passwords not same');
     }
-
-
-    //return this.props.toMainApp();
   },
 
   render: function() {
@@ -129,7 +122,7 @@ var Registration = new React.createClass({
               <input
                 className="loginButton"
                 type="button"
-                onClick={this.redirectToMainApp}
+                onClick={this.createUser}
                 value="create"
               />
               <p className="message">Already registered? <a href="#" onClick={this.redirectToLogin}>Sign In</a></p>

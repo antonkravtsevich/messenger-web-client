@@ -15,6 +15,9 @@ var ReplyBox = new React.createClass({
 
   sendMessage: function () {
     this.props.sendMessage(this.state.text);
+    this.setState({
+      text:''
+    })
   },
 
   render: function() {
