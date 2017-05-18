@@ -14,7 +14,7 @@ var Contact = new React.createClass({
 
   componentWillMount: function () {
     let self=this;
-    axios.get('http://188.166.93.46:3001/users/'+this.props.companion_id)
+    axios.get('http://localhost:3001/users/'+this.props.companion_id)
       .then(function (response) {
         self.setState({
           user: response.data.message

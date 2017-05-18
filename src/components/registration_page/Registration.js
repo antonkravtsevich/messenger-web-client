@@ -57,7 +57,7 @@ var Registration = new React.createClass({
 
   createUser: function (e) {
     if(this.state.password === this.state.conf_password){
-      axios.post('http://188.166.93.46:3001/users', {
+      axios.post('http://localhost:3001/users', {
         username: this.state.username,
         password: this.state.password,
         first_name: this.state.first_name,
