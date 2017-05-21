@@ -8,8 +8,7 @@ var SearchBox = new React.createClass({
   },
 
   changeSearchString: function (e) {
-    this.props.changeUsersList(e.target.value);
-
+    this.props.changeSearchString(e.target.value);
     this.setState({
       searchString: e.target.value
     });

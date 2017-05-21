@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import axiosErrorLog from '../../controllers/logger'
 
 //TODO: registration on server
 
@@ -65,6 +66,8 @@ var Registration = new React.createClass({
         email: this.state.email
       }).then(function (res) {
         alert(res.data.message);
+      }).catch((error) => {
+        axiosErrorLog('REFISTRATION: createUser', error)
       })
     } else {
       alert('Passwords not same');

@@ -2,43 +2,50 @@ import React from 'react';
 import LeftBar from './left/LeftBar'
 import RightBar from './rigth/RightBar'
 import axios from 'axios'
+import axiosErrorLog from '../../controllers/logger'
 
 var MainApp = new React.createClass({
   getInitialState: function () {
     return {
       user: {},
-      users: [],
-      chats: [],
-      current_users_list: [],
-      current_messages: [],
       chat_id: '',
-      companion_id: '',
-      companion_name: '',
-      searchString: ''
     };
   },
 
-  loadAllUsers: function () {
+  changeChatID: function (chat_id) {
+    console.log("CHANGE CHAT TO: "+chat_id);
+    this.setState({
+      chat_id: chat_id
+    });
+  },
+
+  //TODO PUT IT INTO LEFT BAR COMPONENT!!!
+  /*loadAllUsers: function () {
+    //DEBUG
+    //console.log('MAINAPP: loadAllUSers');
     let self = this;
     axios.get('http://localhost:3001/users')
       .then(function (response) {
         //DEBUG
-        //console.log('users: ' + JSON.stringify(response.data.message));
+        console.log('users: ' + JSON.stringify(response.data.message, null, 2));
 
         self.setState({
           users: response.data.message
         })
-      }).catch(function (err) {
-        console.error('loadAllUsers, '+err);
+      }).catch((error) => {
+        axiosErrorLog('MAINAPP: loadAllUsers', error)
       })
-  },
+  },*/
 
+  //TODO PUT IT INTO LEFT BAR COMPONENT!!!
   // if searchBox empty, contactsBar show only exist chats
   // but if you want to begin texting with new user, you can
   // search him
   // so, if searchBox not empty, contactsBar show result of
   // search of all users
-  changeUsersList: function (searchString) {
+  /*changeUsersList: function (searchString) {
+    //DEBUG
+    //console.log('MAINAPP: changeUsersList');
     let self = this;
     if(searchString === ''){
       //DEBUG
@@ -60,9 +67,12 @@ var MainApp = new React.createClass({
         current_users_list: searchResult
       });
     }
-  },
+  },*/
 
+  //TESTED, WORK FINE
   loadUserData: function(){
+    //DEBUG
+    //console.log('MAINAPP: loadUserData');
     let jwt = this.props.jwt;
     let self = this;
 
@@ -72,17 +82,21 @@ var MainApp = new React.createClass({
       }
     }).then(function (response) {
       //DEBUG:
-      //console.log('user: '+JSON.stringify(response.data.message));
+      console.log('user: '+JSON.stringify(response.data.message, null, 2));
       //console.log('props.jwt: '+self.props.jwt);
       self.setState({
         user: response.data.message
       });
-    }).catch(function (ex) {
-      console.error('loadUserData, '+ex)
+    }).catch((error) => {
+      axiosErrorLog('MAINAPP: loadUserData', error)
     })
   },
 
+  //TODO PUT IT INTO LEFT BAR COMPONENT!!!
+  /*
   loadChats: function (callback) {
+    //DEBUG
+    //console.log('MAINAPP: loadChats');
     let jwt = this.props.jwt;
     let self = this;
     axios.get('http://localhost:3001/chats',{
@@ -91,7 +105,7 @@ var MainApp = new React.createClass({
       }
     }).then(function (response) {
       //DEBUG:
-      //console.log('chats: '+JSON.stringify(response.data.message));
+      console.log('chats: '+JSON.stringify(response.data.message, null, 2));
 
       self.setState({
         chats: response.data.message
@@ -99,66 +113,74 @@ var MainApp = new React.createClass({
       if (callback!=null){
         callback();
       }
+    }).catch((error) => {
+      axiosErrorLog('MAINAPP: loadChats', error)
     })
   },
+  */
 
-  changeChat: function (companion_id) {
-    let jwt = this.props.jwt;
-    let self = this;
-
-    //get chat_id by users ids
-    //console.log('MainApp: changeChat: companion_id: '+companion_id);
-    axios.get('http://localhost:3001/chats/by_users/'+companion_id, {
+  //REFACTOR CREATE ONE METHOD!!!
+  // PUT IT INTO LEFT BAR COMPONENT!!!
+  /*
+  changeChatByUserId: function(user_id) {
+    axios.get('http://localhost:3001/chats/by_users/'+user_id, {
       headers:{
         jwt: jwt
       }
-    }).then(function(response_chat_id){
-      var chat_id = response_chat_id.data.message;
-      //console.log('MainApp: changeChat: chat_id: '+chat_id);
-      axios.get('http://localhost:3001/chats/'+chat_id, {
-        headers:{
-          jwt: jwt
-        }
-      }).then(function(response_chat){
-        //get companion_name
-        axios.get('http://localhost:3001/users/'+companion_id)
-          .then(function (response_user) {
-            // DEBUG
-            //console.log('New user for conversation: '+response_user.data.message.username);
-            self.setState({
-              chat_id: chat_id,
-              companion_id: companion_id,
-              companion_name: response_user.data.message.username,
-              current_messages: response_chat.data.message
-            });
-          }).catch(function(ex){
-            console.error('change chat: 1: ', ex);
-          })
-      }).catch(function(ex){
-        console.error('change chat: 2: ', ex);
+    }).then(function(response){
+      this.setState({
+        chat_id: response.message._id,
+        current_messages: response.message.messages,
+        companion: response.message.users[0];
       })
-    }).catch(function(ex){
-      console.error('change chat: 3: ', ex);
+    }).catch((error) => {
+      axiosErrorLog('MAINAPP: changeChatByUserId', error)
     })
   },
 
-  reloadMessages: function () {
-    let self = this;
-    let chat_id = this.state.chat_id;
-    let jwt = this.props.jwt;
+  changeChatByChatId: function(chat_id){
     axios.get('http://localhost:3001/chats/'+chat_id, {
       headers:{
         jwt: jwt
       }
-    }).then(function (response) {
-      self.setState({
-        current_messages: response.data.message
+    }).then(function(response){
+      this.setState({
+        chat_id: response.message._id,
+        current_messages: response.message.messages,
+        companion: response.message.users[0];
       })
+    }).catch((error) => {
+      axiosErrorLog('MAINAPP: changeChatByChatId', error)
     })
   },
+  */
 
-  //TODO messages list reload
-  sendMessage: function (text) {
+  //TODO this must be in RightBar
+  /*reloadMessages: function () {
+    //DEBUG
+    //console.log('MAINAPP: reloadMessages');
+    let self = this;
+    let chat_id = this.state.chat_id;
+    let jwt = this.props.jwt;
+    if(this.state.chat_id!=""){
+      axios.get('http://localhost:3001/chats/'+chat_id, {
+        headers:{
+          jwt: jwt
+        }
+      }).then(function (response) {
+        self.setState({
+          current_messages: response.data.message
+        })
+      }).catch((error) => {
+        axiosErrorLog('MAINAPP: reloadMessages', error)
+      })
+    }
+  },*/
+
+  //TODO PUT IT IN LEFT BAR!!!
+  /*sendMessage: function (text) {
+    //DEBUG
+    //console.log('MAINAPP: sendMessage');
     var jwt = this.props.jwt;
     var companion_id = this.state.companion_id;
     let self = this;
@@ -182,52 +204,52 @@ var MainApp = new React.createClass({
       .then(function (resp) {
         self.reloadMessages();
         self.loadChats();
-      })
-      .catch(function (ex) {
-        console.error(ex);
+      }).catch((error) => {
+        axiosErrorLog('MAINAPP: sendMessage', error)
       })
     }
-  },
+  },*/
+
 
   reloadData: function (callback) {
-    console.log('reloadData');
+    //DEBUG
+    //console.log('MAINAPP: reloadData');
     this.loadUserData();
-    this.loadChats(callback);
-    this.reloadMessages();
+    //this.loadChats(callback);
+    //this.reloadMessages();
   },
 
   componentWillMount: function () {
-    let self=this;
-    let chats=this.state.chats;
-    self.reloadData(function () {
-      self.setState({
-        current_users_list: self.state.chats
-      })
-    });
-    this.interval = setInterval(self.reloadData, 1000);
+    //DEBUG
+    //console.log('MAINAPP: componentWillMount');
+
+    //uncomment if NOT DEBUG
+    //this.interval = setInterval(self.reloadData, 1000);
   },
 
   componentWillUnmount: function () {
+    //DEBUG
+    //console.log('MAINAPP: componentWillUnmount');
     clearInterval(this.interval);
   },
 
   render: function() {
+    //DEBUG
+    //console.log('MAINAPP: render');
     return (
       <div className="conteiner app">
+      {
         <div className="row app-one">
           <LeftBar
-            users_list={this.state.current_users_list}
-            changeChat={this.changeChat}
-            changeUsersList={this.changeUsersList}
+            current_user={this.state.user}
+            jwt={this.props.jwt}
+            changeChatID={this.changeChatID}
           />
-          <RightBar
-            companion_name={this.state.companion_name}
-            messages={this.state.current_messages}
-            user_id={this.state.user._id}
-            sendMessage={this.sendMessage}
-          />
+        {/*}<RightBar
+          />*/}
         </div>
-      </div>
+      }
+    </div>
     );
   }
 });

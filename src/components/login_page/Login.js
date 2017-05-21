@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import axiosErrorLog from '../../controllers/logger';
 
 var Login = new React.createClass({
 getInitialState: function () {
@@ -20,15 +21,13 @@ redirectToMainApp: function (e) {
       username: this.state.username,
       password: this.state.password
     }).then(function (response) {
-      if(response.data.status!=='error'){
+      if(response.data.status!='error'){
         var jwt = response.data.jwt;
         return self.props.toMainApp(jwt);
       } else {
         alert(response.data.message);
       }
-    }).catch(function (err) {
-      console.error(err)
-    });
+    })
 },
 
 onChangeLogin: function (e) {
