@@ -17,7 +17,7 @@ redirectToRegistration: function (e) {
 
 redirectToMainApp: function (e) {
     var self = this;
-    axios.post('http://localhost:3001/ask_token', {
+    axios.post('http://188.166.93.46:3001/ask_token', {
       username: this.state.username,
       password: this.state.password
     }).then(function (response) {

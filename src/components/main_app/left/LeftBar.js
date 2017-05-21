@@ -19,7 +19,7 @@ var LeftBar = new React.createClass({
     //DEBUG
     //console.log('MAINAPP: loadAllUSers');
     let self = this;
-    axios.get('http://localhost:3001/users')
+    axios.get('http://188.166.93.46:3001/users')
       .then(function (response) {
         //DEBUG
         console.log('users: ' + JSON.stringify(response.data.message, null, 2));
@@ -43,7 +43,7 @@ var LeftBar = new React.createClass({
     //console.log('MAINAPP: loadChats');
     let jwt = this.props.jwt;
     let self = this;
-    axios.get('http://localhost:3001/chats',{
+    axios.get('http://188.166.93.46:3001/chats',{
       headers:{
         jwt: jwt
       }
@@ -57,41 +57,37 @@ var LeftBar = new React.createClass({
     })
   },
 
-  /*
-  //TODO create timer
-  reloadList: function (this.state.search_string) {
-    if(searchString === ''){
-      loadAllChats();
-    } else {
-      loadAllUsers();
-    }
-  }*/
-
   changeSearchString: function (search_string) {
     if (search_string === ''){
       this.setState({
-        search_string: search_string,
-        list_type: 'chats'
+        list_type: 'chats',
+        search_string: ''
       });
       this.loadAllChats();
     } else {
       this.setState({
-        search_string: search_string,
-        list_type: 'users'
+        list_type: 'users',
+        search_string: search_string
       })
       this.loadAllUsers(search_string);
     }
   },
 
   //make that evry second
-  relaodChats: function () {
+  updateContactList: function () {
+    //DEBUG
+    //console.log("LEFTBAR: reloadChats");
     if(this.state.search_string === ''){
       this.loadAllChats();
     }
   },
 
   componentWillMount: function () {
-    this.loadAllChats();
+    this.interval = setInterval(this.updateContactList, 200);
+  },
+
+  componentWillUnmount: function () {
+    clearInterval(this.interval);
   },
 
   render: function() {

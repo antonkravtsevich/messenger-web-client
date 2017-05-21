@@ -1,4 +1,6 @@
 import React from 'react';
+import axios from 'axios'
+import axiosErrorLog from '../../../../controllers/logger'
 
 var ReplyBox = new React.createClass({
   getInitialState: function () {
@@ -13,11 +15,45 @@ var ReplyBox = new React.createClass({
     });
   },
 
+  handleEnterKey: function (e) {
+    if(e.keyCode == 13){
+      this.sendMessage();
+    }
+  },
+
   sendMessage: function () {
-    this.props.sendMessage(this.state.text);
-    this.setState({
-      text:''
-    })
+    //DEBUG
+    //console.log('MAINAPP: sendMessage');
+    if(this.props.chat_user!=undefined){
+      var jwt = this.props.jwt;
+      var chat_user_id = this.props.chat_user._id;
+      let self = this;
+      const url = 'http://188.166.93.46:3001/messages';
+      const params = {
+        text: self.state.text,
+        reciever: chat_user_id
+      };
+      const config = {
+        headers: {
+          'jwt': jwt
+        }
+      };
+
+      if((chat_user_id!=='')&&(self.state.text!=='')){
+        //DEBUG
+        console.log('REPLYBOX: sendMessage |: user: '+chat_user_id+"\ntext: "+self.state.text);
+
+        axios.post(url, params, config)
+        .then(function (resp) {
+          self.props.loadChat();
+          self.setState({
+            text: ''
+          })
+        }).catch((error) => {
+          axiosErrorLog('MAINAPP: sendMessage', error)
+        })
+      }
+    }
   },
 
   render: function() {
@@ -26,8 +62,11 @@ var ReplyBox = new React.createClass({
         <div className="col-sm-9 col-xs-9 reply-main">
           <textarea
             className="form-control"
-            rows="1" id="comment"
+            rows="1"
+            id="comment"
             value={this.state.text}
+            tabIndex="0"
+            onKeyDown={this.handleEnterKey}
             onChange={this.onChangeText}
           />
         </div>

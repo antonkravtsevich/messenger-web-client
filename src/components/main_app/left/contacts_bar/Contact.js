@@ -8,12 +8,12 @@ var Contact = new React.createClass({
     var chat_user_id = this.props.user._id;
     var jwt = this.props.jwt;
     var self = this;
-    axios.get('http://localhost:3001/chats/by_users/'+chat_user_id, {
+    axios.get('http://188.166.93.46:3001/chats/by_users/'+chat_user_id, {
       headers:{
         jwt: jwt
       }
     }).then(function(response){
-      console.log("CONTACTS: changeChatID | response: "+JSON.stringify(response, null, 2));
+      //console.log("CONTACTS: changeChatID | response: "+JSON.stringify(response, null, 2));
       self.props.changeChatID(response.data.message._id);
     })
   },

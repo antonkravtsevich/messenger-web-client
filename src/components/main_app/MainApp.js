@@ -4,6 +4,10 @@ import RightBar from './rigth/RightBar'
 import axios from 'axios'
 import axiosErrorLog from '../../controllers/logger'
 
+//TODO TODO TODO TODO
+// 1. Make timer to reload chat list
+//TODO TODO TODO TODO
+
 var MainApp = new React.createClass({
   getInitialState: function () {
     return {
@@ -19,12 +23,18 @@ var MainApp = new React.createClass({
     });
   },
 
+  handleKeyDown: function(e){
+    if(e.keyCode === 27){
+      this.changeChatID('');
+    }
+  },
+
   //TODO PUT IT INTO LEFT BAR COMPONENT!!!
   /*loadAllUsers: function () {
     //DEBUG
     //console.log('MAINAPP: loadAllUSers');
     let self = this;
-    axios.get('http://localhost:3001/users')
+    axios.get('http://188.166.93.46:3001/users')
       .then(function (response) {
         //DEBUG
         console.log('users: ' + JSON.stringify(response.data.message, null, 2));
@@ -76,7 +86,7 @@ var MainApp = new React.createClass({
     let jwt = this.props.jwt;
     let self = this;
 
-    axios.get('http://localhost:3001/users/data',{
+    axios.get('http://188.166.93.46:3001/users/data',{
       headers:{
         jwt: jwt
       }
@@ -99,7 +109,7 @@ var MainApp = new React.createClass({
     //console.log('MAINAPP: loadChats');
     let jwt = this.props.jwt;
     let self = this;
-    axios.get('http://localhost:3001/chats',{
+    axios.get('http://188.166.93.46:3001/chats',{
       headers:{
         jwt: jwt
       }
@@ -123,7 +133,7 @@ var MainApp = new React.createClass({
   // PUT IT INTO LEFT BAR COMPONENT!!!
   /*
   changeChatByUserId: function(user_id) {
-    axios.get('http://localhost:3001/chats/by_users/'+user_id, {
+    axios.get('http://188.166.93.46:3001/chats/by_users/'+user_id, {
       headers:{
         jwt: jwt
       }
@@ -139,7 +149,7 @@ var MainApp = new React.createClass({
   },
 
   changeChatByChatId: function(chat_id){
-    axios.get('http://localhost:3001/chats/'+chat_id, {
+    axios.get('http://188.166.93.46:3001/chats/'+chat_id, {
       headers:{
         jwt: jwt
       }
@@ -163,7 +173,7 @@ var MainApp = new React.createClass({
     let chat_id = this.state.chat_id;
     let jwt = this.props.jwt;
     if(this.state.chat_id!=""){
-      axios.get('http://localhost:3001/chats/'+chat_id, {
+      axios.get('http://188.166.93.46:3001/chats/'+chat_id, {
         headers:{
           jwt: jwt
         }
@@ -184,7 +194,7 @@ var MainApp = new React.createClass({
     var jwt = this.props.jwt;
     var companion_id = this.state.companion_id;
     let self = this;
-    const url = 'http://localhost:3001/messages';
+    const url = 'http://188.166.93.46:3001/messages';
     const params = {
       text: text,
       reciever: companion_id
@@ -237,7 +247,7 @@ var MainApp = new React.createClass({
     //DEBUG
     //console.log('MAINAPP: render');
     return (
-      <div className="conteiner app">
+      <div tabIndex="0" className="conteiner app" onKeyDown={this.handleKeyDown}>
       {
         <div className="row app-one">
           <LeftBar
@@ -245,8 +255,10 @@ var MainApp = new React.createClass({
             jwt={this.props.jwt}
             changeChatID={this.changeChatID}
           />
-        {/*}<RightBar
-          />*/}
+          <RightBar
+            jwt={this.props.jwt}
+            chat_id={this.state.chat_id}
+          />
         </div>
       }
     </div>
